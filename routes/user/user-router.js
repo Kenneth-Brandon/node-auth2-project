@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const UserDB = require('./user-model.js');
-const checkJWT = require('../../auth/restricted-midd.js');
+const checkJWT = require('../../auth/restricted-middleware.js');
 const checkDpt = require('../../auth/check-department.js');
 
 router.get('/', checkJWT, (req, res) => {
