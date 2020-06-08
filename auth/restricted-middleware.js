@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secret.js');
 
-function checkJWT(req, res, next) {
+module.exports = (req, res, next) => {
   const token = req.headers.authorization;
 
   if (token) {
@@ -17,6 +17,4 @@ function checkJWT(req, res, next) {
   } else {
     res.status(401).json({ errorMessage: 'Token not exist' });
   }
-}
-
-module.exports = checkJWT;
+};

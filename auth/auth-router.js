@@ -39,7 +39,6 @@ router.post('/login', (req, res) => {
           (userInfo && bcryptjs.compareSync(userInfo.password, u.password)) ||
           userInfo.password === u.password
         ) {
-          //console.log("u",u , "\nuserInfo", userInfo)
           const token = generateToken(u);
           res.status(200).json({ message: 'Login Successful', token });
         } else {

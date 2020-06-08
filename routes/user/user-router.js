@@ -3,7 +3,7 @@ const UserDB = require('./user-model.js');
 const checkJWT = require('../../auth/restricted-middleware.js');
 const checkDpt = require('../../auth/check-department.js');
 
-router.get('/', checkJWT, (req, res) => {
+router.get('/', checkJWT, checkDpt('admin'), (req, res) => {
   const dep = req.decodedJwt.department;
   console.log('department ', dep);
   if (checkDpt(dep) && dep === 'admin') {
