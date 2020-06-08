@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const userDB = require('./user-model');
+const checkJWT = require('../../auth/restricted-middleware.js');
 
-router.get('/', (req, res, next) => {
+router.get('/', checkJWT, (req, res, next) => {
   userDB
     .findAllUsers()
     .then((users) => {
