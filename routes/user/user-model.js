@@ -23,9 +23,14 @@ function addUser(user) {
     });
 }
 
+function filterByDepartment(dept) {
+  return db('userAuth').where({ department: dept }).orderBy('id');
+}
+
 module.exports = {
   findAllUsers,
   addUser,
   findUserById,
   findUserByName,
+  filterByDepartment,
 };
