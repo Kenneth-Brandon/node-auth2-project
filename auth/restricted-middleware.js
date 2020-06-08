@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 const secrets = require('../config/secret.js');
 
 function checkJWT(req, res, next) {
@@ -8,14 +7,15 @@ function checkJWT(req, res, next) {
   if (token) {
     jwt.verify(token, secrets.jwtSecret, (err, decodedToken) => {
       if (err) {
-        res.status(401).json({ errorMessage: 'provided token could not find' });
+        res.status(401).json({ errorMessage: "provided token couldn't find" });
       } else {
         req.decodedJwt = decodedToken;
+        // console.log(req.decodedJwt.department)
         next();
       }
     });
   } else {
-    res.status(401).json({ errorMessage: "token doesn't exist" });
+    res.status(401).json({ errorMessage: 'Token not exist' });
   }
 }
 

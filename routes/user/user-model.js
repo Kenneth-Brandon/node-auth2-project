@@ -23,8 +23,8 @@ function addUser(user) {
     });
 }
 
-function filterByDepartment(dept) {
-  return db('userAuth').where({ department: dept }).orderBy('id');
+function filterByDepartment(dep) {
+  return db('userAuth').where({ department: dep }).orderBy('id');
 }
 
 module.exports = {

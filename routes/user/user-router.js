@@ -1,29 +1,27 @@
 const router = require('express').Router();
-const userDB = require('./user-model');
-const checkJWT = require('../../auth/restricted-middleware.js');
-const checkDept = require('../../auth/check-department.js');
+const UserDB = require('./user-model.js');
+const checkJWT = require('../../auth/restricted-midd.js');
+const checkDpt = require('../../auth/check-department.js');
 
-router.get('/', checkJWT, (req, res, next) => {
-  const dept = req.decodeJwt.department;
-
-  if (checkDept(dept) && dept === 'admin') {
-    userDB
-      .findAllUsers()
+router.get('/', checkJWT, (req, res) => {
+  const dep = req.decodedJwt.department;
+  console.log('department ', dep);
+  if (checkDpt(dep) && dep === 'admin') {
+    UserDB.findAllUsers()
       .then((users) => {
         res.status(200).json(users);
       })
       .catch((err) => {
-        res.status(500).json({ errorMessage: 'server error', err });
+        res.status(500).json({ errorMessage: 'server Error', err });
       });
   } else {
-    userDB
-      .filterByDepartment(dept)
+    UserDB.filterByDepartment(dep)
       .then((users) => {
         res.status(200).json(users);
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json({ errorMessage: 'server error', err });
+        res.status(500).json({ errorMessage: 'server Error', err });
       });
   }
 });

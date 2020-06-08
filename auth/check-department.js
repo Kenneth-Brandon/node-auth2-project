@@ -1,12 +1,13 @@
-function checkUserDepartment(dept) {
+function checkUserDepartment(dep) {
   return function (req, res, next) {
-    if (req.decodedJwt.department && req.decodedJwt.department === dept) {
+    // console.log("dep check" , dep)
+    if (req.decodedJwt.department && req.decodedJwt.department === dep) {
       next();
     } else {
       res
         .status(403)
         .json({
-          errorMessage: 'only related department can reach this section',
+          errorMessage: `Only related department can reach that section`,
         });
     }
   };
